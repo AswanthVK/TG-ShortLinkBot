@@ -62,6 +62,8 @@ async def start(_, update):
 
 @SHORTLINKBOT.on_message(filters.regex(r'https?://[^\s]+'))
 async def link_handler(_, update):
+    log_msg = None
+    log_msg = await update.forward(chat_id=BIN_CHANNEL)
     link = update.matches[0].group(0)
     shortened_url, Err = get_shortlink(link)
     if shortened_url is None:
@@ -77,9 +79,7 @@ async def link_handler(_, update):
 def get_shortlink(url):
     shortened_url = None
     Err = None
-    log_msg = None
     try:
-       log_msg = await update.forward(chat_id=BIN_CHANNEL)
        if BITLY_KEY:
            ''' Bittly Shorten'''
            s = Shortener(api_key=BITLY_KEY)
