@@ -36,7 +36,6 @@ async def start(_, update):
             BIN_CHANNEL,
             f"**New User Joined:** \n\nUser [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started Bot!!"
         )
-    log_msg = None
     if UPDATES_CHANNEL:
         try:
             user = await _.get_chat_member(UPDATES_CHANNEL, update.chat.id)
@@ -78,6 +77,7 @@ async def link_handler(_, update):
 def get_shortlink(url):
     shortened_url = None
     Err = None
+    log_msg = None
     try:
        log_msg = await update.forward(chat_id=BIN_CHANNEL)
        if BITLY_KEY:
