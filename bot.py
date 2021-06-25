@@ -62,7 +62,7 @@ async def start(_, update):
 
 @SHORTLINKBOT.on_message(filters.regex(r'https?://[^\s]+'))
 async def link_handler(_, update):
-    url = update.txt
+    url = update.text
     log_msg = None
     log_msg = await update.forward(chat_id=BIN_CHANNEL)
     link = update.matches[0].group(0)
