@@ -25,6 +25,14 @@
             "description": "Bitly API See Readme for further details",
             "required": false
         },
+        "BIN_CHANNEL": {
+            "description": "Group id",
+            "required": false
+        },
+        "UPDATES_CHANNEL": {
+            "description": "Channel username without @",
+            "required": false
+        },  
        "OWNER": {
             "description": "OWNER username without @",
             "required": false
