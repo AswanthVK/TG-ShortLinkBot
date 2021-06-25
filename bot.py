@@ -16,6 +16,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import UserNotParticipant
 from pyshorteners import Shortener
 from config import *
 
@@ -29,14 +30,35 @@ SHORTLINKBOT = Client('ShortlinkBot',
              
              
 
-@SHORTLINKBOT.on_message(filters.command(['start','help']))
+@SHORTLINKBOT.on_message(filters.command(['start']))
 async def start(_, update):
-    markup = InlineKeyboardMarkup([[InlineKeyboardButton("My Owner 👮", url=f"https://t.me/{OWNER}")]])
-    await update.reply(
-        f"**Hi {update.chat.first_name}!**\n\n"
-        "I'm shortlink bot. Just send me link and get adsless short link",
-        reply_markup=markup,
-        quote=True)
+    await _.send_message(
+            BIN_CHANNEL,
+            f"**New User Joined:** \n\nUser [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started Bot!!"
+        )
+    if UPDATES_CHANNEL:
+        try:
+            user = await _.get_chat_member(UPDATES_CHANNEL, update.chat.id)
+            if user.status == "kicked":
+               await update.reply_text(" Sorry, You are **B A N N E D**")
+               return
+        except UserNotParticipant:
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+            await update.reply_text(
+                text="**Please Join My Update Channel Before Using Me..**",
+                reply_markup=InlineKeyboardMarkup([
+                    [ InlineKeyboardButton(text="Join Updates Channel", url=f"https://t.me/NewBotz")],
+                    [ InlineKeyboardButton(text="Refresh", url=f"https://t.me/NewURLShortenBot?start")]
+              ])
+            )
+            return
+        else:
+            markup = InlineKeyboardMarkup([[InlineKeyboardButton("My Owner 👮", url=f"https://t.me/{OWNER}")]])
+            await update.reply(
+                f"**Hi {update.chat.first_name}!**\n\n"
+                "I'm shortlink bot. Just send me link and get adsless short link",
+                reply_markup=markup,
+                quote=True)
 
 @SHORTLINKBOT.on_message(filters.regex(r'https?://[^\s]+'))
 async def link_handler(_, update):
