@@ -53,8 +53,8 @@ async def start(_, update):
             )
             return
         else:
-            markup = InlineKeyboardMarkup([[InlineKeyboardButton("My Owner", url=f"https://t.me/{OWNER}"),
-                                                InlineKeyboardMaButton("Share", url="tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AURL%20Shortener%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewURLShortenBot")]])
+            #markup = InlineKeyboardMarkup([[InlineKeyboardButton("My Owner", url=f"https://t.me/{OWNER}"),
+                                                #InlineKeyboardMaButton("Share", url="tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AURL%20Shortener%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewURLShortenBot")]])
             markup=InlineKeyboardMarkup(
                 [
                     [
