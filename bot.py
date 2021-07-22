@@ -78,9 +78,7 @@ async def link_handler(_, update):
     message_url = await _.send_message(
         chat_id=update.chat.id,
         text="`Generating...`",
-        reply_to_message_id=update.message_id,
-        disable_web_page_preview=True,
-        quote=True
+        reply_to_message_id=update.message_id
     )
     link = update.matches[0].group(0)
     shortened_url, Err = get_shortlink(link)
