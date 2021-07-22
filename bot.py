@@ -75,8 +75,10 @@ async def link_handler(_, update):
     url = update.text
     log_msg = None
     log_msg = await update.forward(chat_id=BIN_CHANNEL)
-    message_url = await update.reply_text(
+    message_url = await _.send_message(
+        chat_id=update.chat.id,
         text="`Generating...`",
+        reply_to_message_id=update.message_id,
         disable_web_page_preview=True,
         quote=True
     )
@@ -91,7 +93,7 @@ async def link_handler(_, update):
     #markup = InlineKeyboardMarkup([[InlineKeyboardButton("Link 🔗", url=shortened_url)]])
     # i don't think this bot with get sending message error so no need of exceptions
     await log_msg.reply_text(text=f"**User Name :** [{update.from_user.first_name}](tg://user?id={update.from_user.id})\n\n**User Id :** `{update.from_user.id}`\n\n**Shortened Link :** {shortened_url}", disable_web_page_preview=True, parse_mode="Markdown", quote=True)
-    await update.edit_text(text=message, disable_web_page_preview=True) #quote=True)
+    await _.edit_message_text(text=message, chat_id=update.chat.id, message_id=message_url.message_id, disable_web_page_preview=True) #quote=True)
       
 def get_shortlink(url):
     shortened_url = None
