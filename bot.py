@@ -121,7 +121,8 @@ async def short(bot, update):
     
     link = update.matches[0].group(0)
     shorten_urls = "**--Shorted URLs--**\n"
-    
+
+async def bitly(bot, update):   
     # Bit.ly shorten
     if BITLY_API:
         try:
@@ -130,7 +131,8 @@ async def short(bot, update):
             shorten_urls += f"\n**Bit.ly :-** {url}"
         except Exception as error:
             print(f"Bit.ly error :- {error}")
-    
+ 
+async def chilpit(bot, update):    
     # Chilp.it shorten
     try:
         s = Shortener()
@@ -138,7 +140,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Chilp.it :-** {url}"
     except Exception as error:
         print(f"Chilp.it error :- {error}")
-    
+
+async def clckru(bot, update):     
     # Clck.ru shorten
     try:
         s = Shortener()
@@ -146,7 +149,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Clck.ru :-** {url}"
     except Exception as error:
         print(f"Click.ru error :- {error}")
-    
+
+async def cuttly(bot, update):   
     # Cutt.ly shorten
     if CUTTLY_API:
         try:
@@ -155,7 +159,8 @@ async def short(bot, update):
             shorten_urls += f"\n**Cutt.ly :-** {url}"
         except Exception as error:
             print(f"Cutt.ly error :- {error}")
-    
+ 
+async def dagd(bot, update):   
     # Da.gd shorten
     try:
         s = Shortener()
@@ -163,7 +168,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Da.gd :-** {url}"
     except Exception as error:
         print(f"Da.gd error :- {error}")
-    
+ 
+async def isgd(bot, update):   
     # Is.gd shorten
     try:
         s = Shortener()
@@ -171,7 +177,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Is.gd :-** {url}"
     except Exception as error:
         print(f"Is.gd error :- {error}")
-    
+ 
+async def osdblink(bot, update):   
     # Osdb.link shorten
     try:
         s = Shortener()
@@ -179,7 +186,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Osdb.link :-** {url}"
     except Exception as error:
         print(f"Osdb.link error :- {error}")
-    
+ 
+async def owly(bot, update):   
     # Ow.ly shorten
     try:
         s = Shortener()
@@ -187,7 +195,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Ow.ly :-** {url}"
     except Exception as error:
         print(f"Ow.ly error :- {error}")
-    
+
+async def post(bot, update):     
     # Po.st shorten
     try:
         s = Shortener()
@@ -195,7 +204,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Po.st :-** {url}"
     except Exception as error:
         print(f"Po.st error :- {error}")
-    
+
+async def qpsru(bot, update):    
     # Qps.ru shorten
     try:
         s = Shortener()
@@ -203,7 +213,8 @@ async def short(bot, update):
         shorten_urls += f"\n**Qps.ru :-** {url}"
     except Exception as error:
         print(f"Qps.ru error :- {error}")
-    
+ 
+async def shortcm(bot, update):    
     # Short.cm shorten
     if SHORTCM_API:
         try:
@@ -212,7 +223,8 @@ async def short(bot, update):
             shorten_urls += f"\n**Short.cm :-** {url}"
         except Exception as error:
             print(f"Short.cm error :- {error}")
-    
+ 
+async def tinyurl(bot, update):   
     # TinyURL.com shorten
     try:
         s = Shortener()
@@ -220,7 +232,8 @@ async def short(bot, update):
         shorten_urls += f"\n**TinyURL.com :-** {url}"
     except Exception as error:
         print(f"TinyURL.com error :- {error}")
-    
+
+async def nullpointer(bot, update):     
     # NullPointer shorten
     try:
         s = Shortener(domain='https://0x0.st')
@@ -233,7 +246,38 @@ async def short(bot, update):
     try:
         shorten_urls += "\n\nMade by @NewBotz"
         await message.edit_text(
-            text=shorten_urls,
+            #text=shorten_urls,
+            reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("Bit.ly", callback_data="bitly"),
+                    InlineKeyboardButton("Chilp.it", callback_data="chilpit"),
+                ],
+                [
+                    InlineKeyboardButton("Clck.ru", callback_data="clckru")
+                    InlineKeyboardButton("Cutt.ly", callback_data="cuttly"),
+                ],
+                [
+                    InlineKeyboardButton("Da.gd", callback_data="dagd")
+                    InlineKeyboardButton("Is.gd", callback_data="isgd"),
+                ],
+                [
+                    InlineKeyboardButton("Osdb.link", callback_data="osdblink")
+                    InlineKeyboardButton("Ow.ly", callback_data="owly"),
+                ],
+                [
+                    InlineKeyboardButton("Po.st", callback_data="post")
+                    InlineKeyboardButton("Qps.ru", callback_data="qpsru"),
+                ],
+                [
+                    InlineKeyboardButton("Short.cm", callback_data="shortcm")
+                    InlineKeyboardButton("TinyURL.com", callback_data="tinyurl"),
+                ],
+                [
+                    InlineKeyboardButton("NullPointer", callback_data="nullpointer")
+                ]
+            ]
+        ),
             disable_web_page_preview=True
         )
     except Exception as error:
